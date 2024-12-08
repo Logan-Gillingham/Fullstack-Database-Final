@@ -1,26 +1,27 @@
-<!-- TODO: Header? -->
-
-<div class="main-content">
-    <h1>Sign Up</h1>
-    <form action="/signup" method="post" style="width: 300px;">
-        <% if (errorMessage) { %>
-            <p class="error-message"><%= errorMessage %></p>
-        <% } %>
-        <div class="form-input-container">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-input-container">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit" class="action-button full-width">Sign Up</button>
-    </form>
-    <p style="font-size: 12px; margin-top: 30px;">
-        Already have an account? 
-        <a href="/login" class="register-link">Log in!</a>
-    </p>
-</div>
-
-</body>
+<%- include('partials/header') %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign Up</title>
+		<link rel="stylesheet" href="styles.css">
+</head>
+	<body>
+		<div class="main-content">
+			<h1>Sign Up</h1>
+			<form action="/signup" method="post">
+				<div class="form-group">
+					<label for="username">Username:</label>
+					<input type="text" id="username" name="username" required="">
+      </div>
+				<div class="form-group">
+					<label for="password">Password:</label>
+					<input type="password" id="password" name="password" required="">
+      </div>
+				<button type="submit">Sign Up</button>
+			</form>
+			<p>
+				Already have an account? <a href="/login">Log In</a>
+			</p>
+		</div>
+	</body>
 </html>

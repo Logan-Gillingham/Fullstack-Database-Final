@@ -1,30 +1,50 @@
-<!-- TODO: Header? -->
-<div class="main-content">
-    <h1>Active Polls</h1>
-    <!-- This is an example of how you can render the polls on the page, you're welcome to keep it or change it if you wish. This page isn't fully complete though -->
-    <ul id="polls">
-        <% polls.forEach((poll) => { %>
-            <li class="poll-container" id="<%= poll.id %>">
-                <h2><%= poll.question %></h2>
-                <ul class="poll-options">
-                    <% for (let {answer, votes } of poll.options) { %>
-                        <li id="<%= poll.id %>_<%= answer %>">
-                            <strong><%= answer %>:</strong> <%= votes %> votes
-                        </li>
-                    <% } %>
-                </ul>
-                <form class="poll-form button-container">
-                    <% for (let { answer } of poll.options) { %>
-                        <button class="action-button vote-button" type="submit" value="<%= answer %>" name="poll-option">
-                            Vote for <%= answer %>
-                        </button>
-                    <% } %>
-                    <input type="text" style="display: none;" value="<%= poll.id %>" name="poll-id"/>
-                </form>
-            </li>
-        <% }) %>
-    </ul>
-</div>
-<script src="/frontend.js" type="application/javascript"></script>
-</body>
+<%- include('../partials/header') %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Voting App - Dashboard</title>
+		<link rel="stylesheet" href="styles.css">
+</head>
+	<body>
+		<header>
+			<h1>Voting App</h1>
+			<nav>
+			</nav>
+		</header>
+
+		<div class="main-content">
+			<h2>Your Active Polls</h2>
+			<ul id="polls">
+				<% if (polls.length > 0) { %>
+				<% polls.forEach((poll) => { %>
+				<li class="poll-container">
+					<h3>
+						<%= poll.question %>
+					</h3>
+					<ul class="poll-options">
+						<% for (let { answer, votes } of poll.options) { %>
+						<li>
+							<%= answer %>: <%= votes %> votes
+						</li>
+						<% } %>
+					</ul>
+					<form class="poll-form">
+						<% for (let { answer } of poll.options) { %>
+						<button class="vote-button" type="button" data-poll-id=""
+							<%= poll._id %>" data-option="<%= answer %>">
+							Vote for <%= answer %>
+						</button>
+						<% } %>
+					</form>
+				</li>
+				<% }) %>
+				<% } else { %>
+				<p>You haven't created any polls yet.</p>
+				<% } %>
+			</ul>
+			<a href="/createpoll" class="create-poll-button">Create a New Poll</a>
+		</div>
+
+		<script src="/frontend.js"></script>
+	</body>
 </html>
